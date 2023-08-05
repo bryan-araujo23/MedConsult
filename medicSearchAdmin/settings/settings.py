@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'medicSearch'
 ]
 
 MIDDLEWARE = [
@@ -117,3 +118,10 @@ import os
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# url que lida com a mídia veiuculada na pasta media_root
+MEDIA_URL = '/media/'
+
+# Caminho absoluto do sistema de arquivos, para pasta que conterá
+#  todos arquivos enviados pelo usuário 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
