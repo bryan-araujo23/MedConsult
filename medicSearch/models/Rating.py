@@ -10,7 +10,7 @@ class Rating(models.Model):
     opinion = models.TextField(null=True, blank=True)
     status = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
-    update_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)
     
     def __str__(self):
         return f'Avaliador: {self.user.first_name} | Avaliado: {self.user_rated}'

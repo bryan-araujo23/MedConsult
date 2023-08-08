@@ -13,7 +13,7 @@ class Address(models.Model):
     phone = models.CharField(null=True, blank=True, max_length=50)
     status = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    update_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f'{self.name}'
