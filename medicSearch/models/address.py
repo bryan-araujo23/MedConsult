@@ -1,6 +1,6 @@
 from medicSearch.models import *
 
-# Endereço em que o médico atende
+# Endereço em que o médico atende, relaciona-se tabela neighborhood(bairro)
 class Address(models.Model):
     neighborhood = models.ForeignKey(Neighborhood, null=True, related_name='neighborhood', on_delete=models.SET_NULL)
     name = models.CharField(null=False, max_length=100)

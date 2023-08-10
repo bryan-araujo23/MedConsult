@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 
-
+# Dentro do site logado(interno)
 def list_profile_view(request, id=None):
     if id is None and request.user.is_authenticated: # Se id for none e usuário estiver autenticado
         id = request.user.id                         # id = id do usuário que logado(autenticado)
@@ -8,6 +8,9 @@ def list_profile_view(request, id=None):
         id = 0
     return HttpResponse('<h1>Usuário de id %s!</h1>' %id)
 
+
+
+# request.user -> requisita algo objeto autenticado
 
 # Para Acessarmos qql dado padrão do usuário(obj) logado, é só acessar request.user
 
