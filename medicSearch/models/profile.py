@@ -1,6 +1,7 @@
 from django.db import models
 from django.dispatch import receiver # usado para tratar sinais (eventos) ocorrem durante o uso  do app
 from medicSearch.models import *    # importando todas as classes que existem em models.py do nosso app
+from django.db.models import Sum, Count
 
 class Profile(models.Model):
     """
@@ -60,4 +61,19 @@ class Profile(models.Model):
             instance.profile.save()
         except:
             pass
+
+    def show_scoring_average(self):
+        from .Rating import Rating
+        try:
+            ratings = Rating.objects.filter(user_rated=self.user).aggregate(Sum('value'), Count('user'))
+            if ratings['user__count'] > 0:
+                scoring_average = ratings['value__sum'] / ratings['user__count']
+                scoring_average = round(scoring_average, 2) # Arredondando o valor para duas casas deci
+                return scoring_average
+            return 'Sem avaliações'
+        except:
+            return 'Sem avaliações'
+
+        
+
 

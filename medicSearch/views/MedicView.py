@@ -1,5 +1,6 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 from medicSearch.models import Profile
+from django.core.paginator import Paginator
 
 # Fora do site(SERVIDOR)
 def list_medics_views(request):
@@ -24,9 +25,21 @@ def list_medics_views(request):
         elif state is not None:
             medics = medics.filter(addresses__neighborhood__city__state=state)
         
-    print(medics.all())                               
+    if len(medics) > 0:
+        paginator = Paginator(medics, 8) # objeto de consulta, e qntd que desejamo retornar nohtml
+        page = request.GET.get('page')
+        medics = paginator.get_page(page)
+
+    get_copy = request.GET.copy()
+    parameters = get_copy.pop('page', True) and get_copy.urlencode()
+
+
+    context = {
+        'medics': medics,
+        'parameters': parameters
+    }                             
     
-    return HttpResponse('Listagem de 1 ou mais médicos')
+    return render(request, template_name='medic/medics.html', context=context, status=200)
 
 # REQUEST é o parâmetro PADRÃO de uma view(func, class), aqui parâmetro requisita todos os dados do usuário para um servidor VIA URL.
 
