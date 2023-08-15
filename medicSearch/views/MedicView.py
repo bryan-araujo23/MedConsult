@@ -1,6 +1,9 @@
-from django.shortcuts import render
-from medicSearch.models import Profile
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from medicSearch.models import Profile, Rating
 from django.core.paginator import Paginator
+
+
 
 # Fora do site(SERVIDOR)
 def list_medics_views(request):
@@ -56,4 +59,80 @@ def list_medics_views(request):
 
 
 
+def add_favorite_view(request):
+    page = request.POST.get("page") # Usando método acessar os dados enviados através do corpo de uma requisição POST:
+    name = request.POST.get("name")
+    speciality = request.POST.get("speciality")
+    neighborhood = request.POST.get("neighborhood")
+    city = request.POST.get("city")
+    state = request.POST.get("state")
+    id = request.POST.get("id")
 
+    try:
+        profile = Profile.objects.filter(user=request.user).first() # Pegando o perfil do usuário logado
+        medic = Profile.objects.filter(user__id=id).first()         # Pegando o perfil do médico pelo id
+        profile.favorites.add(medic.user)                           # add, um método que usamos em um atributo de tipo many to many field
+        profile.save()
+        msg = "Favorito adicionado com sucesso"                     # msg e type são 2 var que serão usadas para exibir umamsg no template
+        _type = "success"
+    except Exception as e:
+        print("Erro %s" % e)
+        msg = "Um erro ocorreu ao salvar o médico nos favoritos"
+        _type = "danger"
+    if page:
+        arguments = "?page=%s" % (page)
+    else:
+        arguments = "?page=1"
+    if name:
+        arguments += "&name=%s" % name
+    if speciality:
+        arguments += "&specinality=%s" % speciality
+    if neighborhood:
+        arguments += "&neighborhood=%s" % neighborhood
+    if city:
+        arguments += "&city=%s" % city
+    if state:
+        arguments += "&state=%s" % state
+
+    arguments += "&msg=%s&type=%s" % (msg, _type)
+
+    return redirect(to='/medic/%s' % arguments) # redirecionando o usuário para uma url específica
+
+
+
+# request.POST.items(): Retorna uma lista de tuplas contendo todos os pares chave-valor dos campos enviados na requisição POST.
+
+# request.POST.keys(): Retorna uma lista de todas as chaves (nomes dos campos) enviados na requisição POST.
+
+# request.POST.values(): Retorna uma lista de todos os valores dos campos enviados na requisição POST.
+
+# request.POST.getlist("nome"): Retorna uma lista de valores para o campo "nome" na requisição POST, caso ele apareça várias vezes.
+
+# request.POST.dict(): Retorna um dicionário contendo todos os campos e seus valores da requisição POST.
+
+
+def remove_favorite_view(request):
+    page = request.POST.get("page")
+    id = request.POST.get("id")
+
+    try:
+        profile = Profile.objects.filter(user=request.user).first()
+        medic = Profile.objects.filter(user__id=id).first()
+        profile.favorites.remove(medic.user)
+        profile.save()
+        msg = "Favorito removido com sucesso."
+        _type = "success"
+    except Exception as e:
+        print("Erro %s" % e)
+        msg = "Um erro ocorreu ao remover o médico nos favoritos."
+        _type = "danger"
+
+
+    if page:
+        arguments = "?page=%s" % (page)
+    else:
+        arguments = "?page=1"
+
+    arguments += "&msg=%s&type=%s" % (msg, _type)
+
+    return redirect(to='/profile/%s' % arguments)
