@@ -88,8 +88,6 @@ def edit_profile(request):
                 message = {'type': 'warning', 'text': 'E-mail já usado por outro usuário'}
 
 
-
-
     context = {
         'profileForm': profileForm,
         'userForm': userForm,

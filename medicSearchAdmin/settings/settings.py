@@ -125,3 +125,9 @@ MEDIA_URL = '/media/'
 # Caminho absoluto do sistema de arquivos, para pasta que conterá
 #  todos arquivos enviados pelo usuário 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+LOGIN_URL = '/login'                  # define a rota padrão de login do sistema
+LOGIN_REDIRECT_URL = '/'              # define para onde seremos redirecionado caso o login ocorra com sucesso
+LOGOUT_URL = '/logout'                # define a rota padrão de logout do sitema
+LOGOUT_REDIRECT_URL = '/login'        # define por onde seremos redirecionado caso o logout seja dfeito com sucesso
