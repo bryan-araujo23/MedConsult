@@ -1,8 +1,14 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 # do   app       pasta  arquivo import  classe
 from medicSearch.forms.AuthForm import LoginForm, RegisterForm
 from  django.contrib.auth.models import User
+
+
+
+# Vamos usar o atributo next da url para direcionar o
+# usuário para página que ele queira após realizar o login
+
 
 
 def login_view(request):
@@ -22,10 +28,14 @@ def login_view(request):
             
             if user is not None:
                 login(request, user)
-                return redirect('/')
+                _next = request.GET.get('next')
+                if _next is not None:
+                    return redirect(_next)
+                else:
+                    return redirect("/")
             else:
                 message =  {
-                    'type': 'Danger',
+                    'type': 'danger',
                     'text': 'Dados do usuário inválidos'
                 }
 
@@ -91,3 +101,9 @@ def register_view(request):
 # post = envia
 # put = atualiza
 # delete = excluí
+
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('/login') # redirecionando para url login

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from medicSearch.models import Profile
 from django.core.paginator import Paginator
@@ -53,6 +54,7 @@ def list_profile_view(request, id=None):
 # request.user.is_authenticated -> atributo que informa se usuário estálogado ou não
 
 
+@login_required
 def edit_profile(request):   
     profile = get_object_or_404(Profile, user=request.user) # Profile class principal
     emailUnused = True
