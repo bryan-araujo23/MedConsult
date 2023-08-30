@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'medicSearch'
+    'medicSearch',
+    'social_django'
+
 ]
 
 MIDDLEWARE = [
@@ -63,6 +65,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -131,3 +135,53 @@ LOGIN_URL = '/login'                  # define a rota padrão de login do sistem
 LOGIN_REDIRECT_URL = '/'              # define para onde seremos redirecionado caso o login ocorra com sucesso
 LOGOUT_URL = '/logout'                # define a rota padrão de logout do sitema
 LOGOUT_REDIRECT_URL = '/login'        # define por onde seremos redirecionado caso o logout seja dfeito com sucesso
+
+
+# define quais backends de autenticação serão utilizados para lidar com a autenticação social. 
+AUTHENTICATION_BACKENDS = [
+    # Google
+    'social_core.backends.google.GoogleOAuth2', 
+    # Facebook         
+    'social_core.backends.facebook.FacebookOAuth2',
+    # modelo padrão da nossa aplicação
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+# Quando criamos o login com alguma rede social, geralmente alguns dados são transitados
+# entre a API dda rede social e nossa aplicação(username, email, fotos,  etc...)
+# O social_django cria algumas tabelas em nossa aplicação para poder gerenciar esses dados 
+# Sem interfirir na tabela de usuário(Profile) padrão
+
+# id do aplicativo: 1043662877067985
+# chave secreta do app: 84ab2aaeb7e3009bdfcf7ff46ada0220
+
+
+SOCIAL_AUTH_FACEBOOK_KEY = "1043662877067985"
+SOCIAL_AUTH_FACEBOOK_SECRET  = "84ab2aaeb7e3009bdfcf7ff46ada0220"
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link']  # lista de permissões para acessar as propriedades de dados do nosso app
+
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {                # dict possuí  uma chave com os campos em que o valor é uma 
+    'fields': 'id, name, email, picture.type(large), link'   # lista de attr que devem ser retornados pelo facebook.
+}
+
+
+# Precisamos especificar os campos para armazenar os dados
+#  Adicionais que solicitamos ao banco de dados
+SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [  
+
+    ('name', 'name'),
+    ('email', 'email'),
+    ('picture', 'picture'),
+    ('link', 'profile_url'),
+
+]
+
+# google
+# ID do cliente: 71921871485-f9dsh60dqfsrni9kkjteps5fmatssji5.apps.googleusercontent.com
+# Chave Secreta do cliente: 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
+
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '71921871485-f9dsh60dqfsrni9kkjteps5fmatssji5.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
