@@ -185,3 +185,17 @@ SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '71921871485-f9dsh60dqfsrni9kkjteps5fmatssji5.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
+# campo que diz que se será usada a criptgrafia TLS ou não
+EMAIL_USE_TLS = True  
+# Host do seu provedor de e-mail       
+EMAIL_HOST = 'smtp.gmail.com'
+# E-mail que será usado para fazer o envio dos e-mails.
+EMAIL_HOSTE_USER = 'seuemail@gmail.com'
+# Senha do seu e-mail
+EMAIL_HOST_PASSWORD = 'sua senha'
+# porta que provedor usará parafazer o envio dos e-mails
+EMAIL_PORT = 587
+# E-mail padrão para servir de remetente em nossos e-mails
+DEFAULT_FROM_EMAIL = EMAIL_HOSTE_USER
+# Campo que informa se será usada a criptografia ssl no envio.
+EMAIL_USE_SSL = False
