@@ -1,0 +1,35 @@
+Testes unitários: São Testes de unidade, basicamente testes da menor parte testável da aplicação.
+Exemplo: Se você está desenvolvendo um programa utilizando o paradigma orientado a objeto, a menor parte 
+testável do seu programa são: Métodos e atributos de nossa classe. Se nosso programa utilizasse o paradigma
+Funcional, a menor parte do programa seria as funções.
+
+Outros tipos de teste:
+teste de instalação e configuração, 
+teste de integridade, 
+Teste de segurança,
+Teste Funcional,
+Teste integração,
+Teste de volume, 
+Teste de performance, 
+Teste de usabilidade,
+Teste de regressão.
+
+Testes de unidade(unitário) representam 70% dos testes da plataforma, por serem mais barato.
+
+TDD: test-driven development ou desenvolvimento guiados por testes, é uma técnica de desenvolvimento
+Que visa começar o desenvolvimento de cada funcionalidade do software pelo seu teste.
+
+Existem 3 etapas do TDD: 1º Red (Escrever um teste que falhe)
+                         2º Green (Faça o código funcionar)
+                         3º refactor(Elimine redundância)
+
+Temos um conjunto e com ele um MODELO F.I.R.S.T, QUE QUAIS ITENS DEVEMSER PRIORIZADOS NA HORA 
+DE EXECUTAR OS TESTES.
+
+F(FAST) - RÁPIDOS
+I(ISOLATED) - ISOLADOS
+R(REPEATABLE) - REPRODUZÍVEIS
+S(SELF-VERIFYING) - AUTOVERIFICÁVEIS
+T(TIMELY) - OPORTUNOS, NO MOMENTO CERTO.
+
+
