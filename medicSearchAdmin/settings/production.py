@@ -4,7 +4,7 @@ DEBUG = True
 
 SECRET_KEY = 's+3(^Ca*0@+aww=v4tlr*!hqr@*q0gibs*o-z1-+&615ob)k^F'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://med-consult-63b45cb0f41f.herokuapp.com/']
 
 DATABASES = {
     'default': {
@@ -14,3 +14,4 @@ DATABASES = {
 }
 
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
