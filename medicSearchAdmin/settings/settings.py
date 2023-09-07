@@ -13,7 +13,7 @@ SECRET_KEY = 's+7(^sf*0@+aww=v5tlr*!hqr^*qogibs*o-z6-+&617ob)z^m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://med-consult-63b45cb0f41f.herokuapp.com']
+ALLOWED_HOSTS = ['']
 
 
 # Application definition
