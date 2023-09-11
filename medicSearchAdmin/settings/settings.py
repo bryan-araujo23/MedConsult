@@ -190,3 +190,6 @@ EMAIL_USE_SSL = False
 
 import django_heroku
 django_heroku.settings(locals())
+
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
